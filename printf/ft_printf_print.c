@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:38:49 by tjo               #+#    #+#             */
-/*   Updated: 2022/09/26 20:08:25 by tjo              ###   ########.fr       */
+/*   Updated: 2022/09/26 20:30:16 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	print_char(int flag, int width, va_list *vl)
 	char	*tmp;
 	int		fd;
 
-	fd = flag >> 16;
+	fd = flag >> 16 << 16;
 	tmp = (char *)malloc(sizeof(char) * 2);
 	if (!tmp)
 		return (0);
@@ -32,7 +32,7 @@ int	print_string(int flag, int width, int precision, va_list *vl)
 	long long	len;
 	int			fd;
 
-	fd = flag >> 16;
+	fd = flag >> 16 << 16;
 	tmp = va_arg(*vl, char *);
 	if (!tmp)
 		tmp = "(null)";

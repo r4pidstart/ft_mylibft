@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:53:23 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/29 23:24:01 by tjo              ###   ########.fr       */
+/*   Updated: 2022/09/26 18:54:34 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@ static int	write_argument(int flag, char *str, int width)
 
 	ret = 0;
 	if (flag & ARG_SHARP && flag & ARG_CAPITAL)
-		ret += write(1, "0X", 2);
+		ret += write(flag >> 16, "0X", 2);
 	else if (flag & ARG_SHARP)
-		ret += write(1, "0x", 2);
+		ret += write(flag >> 16, "0x", 2);
 	else if (flag & ARG_PLUS)
-		ret += write(1, "+", 1);
+		ret += write(flag >> 16, "+", 1);
 	else if (flag & ARG_SPACE)
-		ret += write(1, " ", 1);
+		ret += write(flag >> 16, " ", 1);
 	else if (flag & FLAG_NEGATIVE)
-		ret += write(1, "-", 1);
+		ret += write(flag >> 16, "-", 1);
 	while (width)
 	{
-		write_siz = write(1, str, width);
+		write_siz = write(flag >> 16, str, width);
 		str += write_siz;
 		ret += write_siz;
 		width -= write_siz;
@@ -54,15 +54,15 @@ int	write_result(int flag, char *str, int width, int slen)
 		filler = '0';
 		if (flag & FLAG_NEGATIVE)
 		{
-			ret += write(1, "-", 1);
+			ret += write(flag >> 16, "-", 1);
 			flag &= ~FLAG_NEGATIVE;
 		}
 	}
 	while (!(flag & ARG_LJUSTIFY) && fill_size)
-		fill_size -= write(1, &filler, 1);
+		fill_size -= write(flag >> 16, &filler, 1);
 	ret += write_argument(flag, str, slen);
 	while (fill_size)
-		fill_size -= write(1, &filler, 1);
+		fill_size -= write(flag >> 16, &filler, 1);
 	if (!(flag & FLAG_STRING))
 		free(str);
 	return (ret);

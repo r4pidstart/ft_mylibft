@@ -6,20 +6,20 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 21:56:30 by tjo               #+#    #+#             */
-/*   Updated: 2022/07/30 02:59:39 by tjo              ###   ########.fr       */
+/*   Updated: 2022/09/26 18:51:22 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf.h"
 
 /* cspdiuxX% */
-static int	parse_argument(char *c, va_list *vl, int *argu_len)
+static int	parse_argument(char *c, va_list *vl, int *argu_len, int fd)
 {
 	int	flag;
 	int	width;
 	int	precision;
 
-	flag = 0;
+	flag = fd << 16;
 	while (*c == '#' || *c == '+' || *c == ' ')
 		flag |= parse_flag1(&c, argu_len);
 	flag |= parse_flag2(&c, &width, vl, argu_len);
@@ -37,44 +37,63 @@ static int	parse_argument(char *c, va_list *vl, int *argu_len)
 		return (print_hex(flag | (*c == 'X') * ARG_CAPITAL, \
 		width, precision, vl));
 	else if (*c == '%')
-		return (write(1, "%", 1));
+		return (write(fd, "%", 1));
 	return (0);
 }
 
-static int	parse_string(char **cur, va_list *vl)
+static int	parse_string(char **cur, va_list *vl, int fd)
 {
 	int	argu_len;
 	int	ret;
 
 	ret = 0;
 	argu_len = 1;
-	ret = parse_argument(++(*cur), vl, &argu_len);
+	ret = parse_argument(++(*cur), vl, &argu_len, fd);
 	(*cur) += argu_len;
+	return (ret);
+}
+
+int	ft_vfprintf(int fd, const char *str, va_list vl)
+{
+	char	*cur;
+	int		ret;
+	int		cnt;
+
+	cnt = 0;
+	cur = (char *)str;
+	while (*cur)
+	{
+		if (*cur == '%')
+			cnt += parse_string(&cur, &vl, fd);
+		else
+		{
+			ret = write(fd, cur++, 1);
+			cnt++;
+			if (!ret)
+				return (0);
+		}
+	}
+	return (cnt);
+}
+
+int	ft_fprintf(int fd, const char *str, ...)
+{
+	va_list	vl;
+	int		ret;
+
+	va_start(vl, str);
+	ret = ft_vfprintf(fd, str, vl);
+	va_end(vl);
 	return (ret);
 }
 
 int	ft_printf(const char *str, ...)
 {
 	va_list	vl;
-	char	*cur;
 	int		ret;
-	int		cnt;
 
 	va_start(vl, str);
-	cnt = 0;
-	cur = (char *)str;
-	while (*cur)
-	{
-		if (*cur == '%')
-			cnt += parse_string(&cur, &vl);
-		else
-		{
-			ret = write(1, cur++, 1);
-			cnt++;
-			if (!ret)
-				return (0);
-		}
-	}
+	ret = ft_vfprintf(1, str, vl);
 	va_end(vl);
-	return (cnt);
+	return (ret);
 }

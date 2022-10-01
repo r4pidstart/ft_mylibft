@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 21:56:30 by tjo               #+#    #+#             */
-/*   Updated: 2022/09/26 18:51:22 by tjo              ###   ########.fr       */
+/*   Updated: 2022/10/01 11:21:13 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	ft_vfprintf(int fd, const char *str, va_list vl)
 	while (*cur)
 	{
 		if (*cur == '%')
-			cnt += parse_string(&cur, &vl, fd);
+			cnt += parse_string(&cur, (va_list *)&vl, fd);
 		else
 		{
 			ret = write(fd, cur++, 1);

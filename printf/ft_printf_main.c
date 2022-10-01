@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 21:56:30 by tjo               #+#    #+#             */
-/*   Updated: 2022/10/01 11:21:13 by tjo              ###   ########.fr       */
+/*   Updated: 2022/10/01 17:37:51 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	parse_string(char **cur, va_list *vl, int fd)
 	return (ret);
 }
 
-int	ft_vfprintf(int fd, const char *str, va_list vl)
+int	ft_vfprintf(int fd, const char *str, va_list *vl)
 {
 	char	*cur;
 	int		ret;
@@ -64,7 +64,7 @@ int	ft_vfprintf(int fd, const char *str, va_list vl)
 	while (*cur)
 	{
 		if (*cur == '%')
-			cnt += parse_string(&cur, (va_list *)&vl, fd);
+			cnt += parse_string(&cur, vl, fd);
 		else
 		{
 			ret = write(fd, cur++, 1);
@@ -82,7 +82,7 @@ int	ft_fprintf(int fd, const char *str, ...)
 	int		ret;
 
 	va_start(vl, str);
-	ret = ft_vfprintf(fd, str, vl);
+	ret = ft_vfprintf(fd, str, &vl);
 	va_end(vl);
 	return (ret);
 }
@@ -93,7 +93,7 @@ int	ft_printf(const char *str, ...)
 	int		ret;
 
 	va_start(vl, str);
-	ret = ft_vfprintf(1, str, vl);
+	ret = ft_vfprintf(1, str, &vl);
 	va_end(vl);
 	return (ret);
 }

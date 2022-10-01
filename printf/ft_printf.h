@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 21:55:51 by tjo               #+#    #+#             */
-/*   Updated: 2022/09/26 18:56:19 by tjo              ###   ########.fr       */
+/*   Updated: 2022/10/01 17:37:58 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ enum	e_args
 /* ft_printf_main.c */
 int		ft_printf(const char *str, ...);
 int		ft_fprintf(int fd, const char *str, ...);
-int		ft_vfprintf(int fd, const char *str, va_list vl);
+int		ft_vfprintf(int fd, const char *str, va_list *vl);
 
 /* ft_printf_parse.c */
 int		parse_flag1(char **c, int *argu_len);

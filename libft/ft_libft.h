@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:16:55 by tjo               #+#    #+#             */
-/*   Updated: 2022/09/03 03:23:45 by tjo              ###   ########.fr       */
+/*   Updated: 2022/11/25 01:16:25 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 // ft_compare.c
 long	ft_min(long a, long b);
 long	ft_max(long a, long b);
+// ft_conversion.c
+int		ft_atoi_check(const char *str, int *chk);
 
 #endif

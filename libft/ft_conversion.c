@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 03:47:43 by tjo               #+#    #+#             */
-/*   Updated: 2022/08/30 04:16:10 by tjo              ###   ########.fr       */
+/*   Updated: 2022/11/25 01:16:00 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 static int	my_isspace(int c)
 {
 	return ((9 <= c && c <= 13) || c == 20 || c == 32);
-}
-
-static int	my_issign(int c)
-{
-	return ('+' == c || '-' == c);
 }
 
 int	ft_atoi(const char *str)
@@ -33,7 +28,7 @@ int	ft_atoi(const char *str)
 		cur++;
 	ret = 0;
 	minus_cnt = 0;
-	if (my_issign(*cur))
+	if ('+' == *cur || '-' == *cur)
 	{
 		if (*cur == '-')
 			minus_cnt++;
@@ -43,6 +38,35 @@ int	ft_atoi(const char *str)
 		ret = ret * 10 + (*(cur++) - '0');
 	if (minus_cnt)
 		ret *= -1;
+	return (ret);
+}
+
+int	ft_atoi_check(const char *str, int *chk)
+{
+	char		*cur;
+	int			minus_cnt;
+	long long	ret;
+
+	cur = (char *)str;
+	while ((9 <= *cur && *cur <= 13) || *cur == 20 || *cur == 32)
+		cur++;
+	ret = 0;
+	minus_cnt = 0;
+	if ('+' == *cur || '-' == *cur)
+	{
+		if (*cur == '-')
+			minus_cnt++;
+		cur++;
+	}
+	if (*cur == '\0')
+		(*chk)++;
+	while ('0' <= *cur && *cur <= '9')
+		ret = ret * 10 + (*(cur++) - '0');
+	if (minus_cnt)
+		ret *= -1;
+	if (*cur != '\0' || ft_strlen(str) > 11 \
+		|| ret < INT32_MIN || ret > INT32_MAX)
+		(*chk)++;
 	return (ret);
 }
 

@@ -6,13 +6,13 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 03:47:43 by tjo               #+#    #+#             */
-/*   Updated: 2022/11/25 01:16:00 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/27 17:08:54 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"./ft_libft.h"
 
-static int	my_isspace(int c)
+int	ft_isspace(int c)
 {
 	return ((9 <= c && c <= 13) || c == 20 || c == 32);
 }

@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 15:16:55 by tjo               #+#    #+#             */
-/*   Updated: 2022/11/25 01:16:25 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/27 17:09:07 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_list
 // int		ft_isalnum(int c);
 // int		ft_isascii(int c);
 // int		ft_isprint(int c);
+int		ft_isspace(int c);
 size_t	ft_strlen(const char *s);
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);

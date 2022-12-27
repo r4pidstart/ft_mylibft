@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 03:47:43 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/27 17:08:54 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/27 17:31:47 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_atoi(const char *str)
 	long long	ret;
 
 	cur = (char *)str;
-	while (my_isspace(*cur))
+	while (ft_isspace(*cur))
 		cur++;
 	ret = 0;
 	minus_cnt = 0;

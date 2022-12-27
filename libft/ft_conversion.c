@@ -6,7 +6,7 @@
 /*   By: tjo <tjo@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 03:47:43 by tjo               #+#    #+#             */
-/*   Updated: 2022/12/27 17:31:47 by tjo              ###   ########.fr       */
+/*   Updated: 2022/12/27 17:36:53 by tjo              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	ft_atoi_check(const char *str, int *chk)
 	return (ret);
 }
 
-int	get_length(long long n)
+int	_get_length(long long n)
 {
 	int	ret;
 
@@ -96,7 +96,7 @@ char	*ft_itoa(int n)
 	char		*ret;
 	int			cur;
 
-	ret = (char *)malloc(sizeof(char) * get_length(n) + 1);
+	ret = (char *)malloc(sizeof(char) * _get_length(n) + 1);
 	if (!ret)
 		return (0);
 	tmp = n;
@@ -108,7 +108,7 @@ char	*ft_itoa(int n)
 	}
 	if (n == 0)
 		ret[cur++] = '0';
-	cur = get_length(n);
+	cur = _get_length(n);
 	ret[cur] = '\0';
 	while (tmp)
 	{
